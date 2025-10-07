@@ -10,14 +10,6 @@ A comprehensive student management system built with **Angular 20** (frontend) a
 - [⚡ Quick Start](#-quick-start)
 - [🔧 Installation & Setup](#-installation--setup)
 - [🎨 Frontend (Angular)](#-frontend-angular)
-- [🔙 Backend (PHP/MySQL)](#-backend-phpmysql)
-- [🧪 Testing & Troubleshooting](#-testing--troubleshooting)
-- [📚 API Documentation](#-api-documentation)
-- [🔒 Security Features](#-security-features)
-- [🚀 Deployment](#-deployment)
-- [🆘 Troubleshooting](#-troubleshooting)
-- [📝 Contributing](#-contributing)
-- [📄 License](#-license)
 
 ## 🚀 Features
 
@@ -266,3 +258,4 @@ export const routes: Routes = [
 
 ### 3. Frontend Configuration
 The frontend is already configured to connect to `http://localhost/student-portal-backend`
+
