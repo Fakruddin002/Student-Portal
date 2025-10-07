@@ -1,0 +1,57 @@
+<div class="container py-5">
+  <!-- Hero Section -->
+  <div class="text-center text-white d-flex align-items-center justify-content-center"
+     style="background: linear-gradient(135deg, #4e73df, #1cc88a); height: 40vh;">
+  <div>
+    <!-- Welcome message for logged-in users -->
+    <div *ngIf="currentUser" class="animate__animated animate__fadeInDown">
+      <h1 class="display-3 fw-bold">Welcome back, {{ currentUser.name }}! 👋</h1>
+      <p class="lead mb-4 animate__animated animate__fadeInUp">Great to see you again! Ready to manage your student portal?</p>
+      <div *ngIf="showWelcomeMessage" class="alert alert-success alert-dismissible fade show" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white;" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <strong>Login Successful!</strong> You are now logged in as {{ currentUser.email }}
+        <button type="button" class="btn-close btn-close-white" (click)="dismissWelcomeMessage()"></button>
+      </div>
+      <a class="btn btn-outline-light btn-lg shadow-sm me-3" routerLink="/complaint">📝 Submit Complaint</a>
+      <button class="btn btn-outline-light btn-lg shadow-sm" (click)="logout()">🚪 Logout</button>
+    </div>
+
+    <!-- Welcome message for non-logged-in users -->
+    <div *ngIf="!currentUser" class="animate__animated animate__fadeInDown">
+      <h1 class="display-3 fw-bold">Welcome to Student Portal</h1>
+      <p class="lead mb-4 animate__animated animate__fadeInUp">Manage your registration, complaints, and updates all in one place.</p>
+      <a class="btn btn-outline-light btn-lg shadow-sm me-3" routerLink="/register">🚀 Get Started</a>
+      <a class="btn btn-outline-light btn-lg shadow-sm" routerLink="/login">🔑 Login</a>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Why Choose Section -->
+  <div class="container text-center py-5">
+  <h2 class="fw-bold mb-3">Why Choose Student Portal?</h2>
+  <p class="text-muted mb-5">Designed for students, ensuring transparency, efficiency, and accessibility.</p>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-80 p-4 hover-effect">
+        <i class="bi bi-chat-dots text-primary display-4 mb-3"></i>
+        <h5>Transparent Communication</h5>
+        <p>Track the status of complaints and stay informed about updates in real-time.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-80 p-4 hover-effect">
+        <i class="bi bi-shield-lock text-success display-4 mb-3"></i>
+        <h5>Secure & Reliable</h5>
+        <p>Your personal information and submissions are encrypted and safely stored.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-80 p-4 hover-effect">
+        <i class="bi bi-speedometer2 text-info display-4 mb-3"></i>
+        <h5>All-in-One Dashboard</h5>
+        <p>Manage registration, view complaints, and update your profile easily.</p>
+      </div>
+    </div>
+  </div>
+</div>

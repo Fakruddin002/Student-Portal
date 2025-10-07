@@ -1,0 +1,236 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-5">
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <div class="mb-3">
+              <i class="bi bi-person-plus-fill text-white" style="font-size: 4rem;"></i>
+            </div>
+            <h2 class="text-white fw-bold mb-2">Join Student Portal</h2>
+            <p class="text-white-50 mb-0">Create your account to access all student services</p>
+          </div>
+
+          <!-- Registration Form -->
+          <form (ngSubmit)="onSubmit()" [formGroup]="form" novalidate>
+            <!-- Personal Information Section -->
+            <div class="mb-4">
+              <h5 class="text-white mb-3">
+                <i class="bi bi-person-lines-fill me-2"></i>Personal Information
+              </h5>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      formControlName="name"
+                      class="form-control bg-white"
+                      id="name"
+                      placeholder="Full Name"
+                      [class.is-invalid]="form.controls['name'].invalid && form.controls['name'].touched"
+                    />
+                    <label for="name" class="text-dark">
+                      <i class="bi bi-person me-2"></i>Full Name
+                    </label>
+                    <div class="invalid-feedback">
+                      <i class="bi bi-exclamation-triangle me-1"></i>Full name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="email"
+                      formControlName="email"
+                      class="form-control bg-white"
+                      id="email"
+                      placeholder="name@example.com"
+                      [class.is-invalid]="form.controls['email'].invalid && form.controls['email'].touched"
+                    />
+                    <label for="email" class="text-dark">
+                      <i class="bi bi-envelope me-2"></i>Email Address
+                    </label>
+                    <div class="invalid-feedback">
+                      <i class="bi bi-exclamation-triangle me-1"></i>Please enter a valid email address
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Academic Information Section -->
+            <div class="mb-4">
+              <h5 class="text-white mb-3">
+                <i class="bi bi-mortarboard-fill me-2"></i>Academic Information
+              </h5>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      formControlName="roll_no"
+                      class="form-control bg-white"
+                      id="rollNo"
+                      placeholder="Roll Number"
+                      [class.is-invalid]="form.controls['roll_no'].invalid && form.controls['roll_no'].touched"
+                    />
+                    <label for="rollNo" class="text-dark">
+                      <i class="bi bi-hash me-2"></i>Roll Number
+                    </label>
+                    <div class="invalid-feedback">
+                      <i class="bi bi-exclamation-triangle me-1"></i>Roll number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="form-floating">
+                    <select
+                      formControlName="department"
+                      class="form-control bg-white"
+                      id="department"
+                      [class.is-invalid]="form.controls['department'].invalid && form.controls['department'].touched"
+                    >
+                      <option value="">Select Department</option>
+                      <!-- Computer Science & IT -->
+                      <option value="BCA">BCA (Bachelor of Computer Applications)</option>
+                      <option value="MCA">MCA (Master of Computer Applications)</option>
+                      <option value="BTECH-CS">B.Tech Computer Science</option>
+                      <option value="MTECH-CS">M.Tech Computer Science</option>
+                      <option value="BSC-IT">B.Sc Information Technology</option>
+                      <option value="MSC-IT">M.Sc Information Technology</option>
+                      <!-- Engineering -->
+                      <option value="BTECH">B.Tech (General)</option>
+                      <option value="MTECH">M.Tech (General)</option>
+                      <option value="BE">B.E (Bachelor of Engineering)</option>
+                      <option value="ME">M.E (Master of Engineering)</option>
+                      <!-- Business & Management -->
+                      <option value="BBA">BBA (Bachelor of Business Administration)</option>
+                      <option value="MBA">MBA (Master of Business Administration)</option>
+                      <option value="BMS">BMS (Bachelor of Management Studies)</option>
+                      <option value="MMS">MMS (Master of Management Studies)</option>
+                      <!-- Commerce -->
+                      <option value="BCOM">B.Com (Bachelor of Commerce)</option>
+                      <option value="MCOM">M.Com (Master of Commerce)</option>
+                      <option value="BBA-FINANCE">BBA Finance</option>
+                      <option value="MBA-FINANCE">MBA Finance</option>
+                      <!-- Science -->
+                      <option value="BSC">B.Sc (Bachelor of Science)</option>
+                      <option value="MSC">M.Sc (Master of Science)</option>
+                      <option value="BSC-MATHS">B.Sc Mathematics</option>
+                      <option value="MSC-MATHS">M.Sc Mathematics</option>
+                      <option value="BSC-PHYSICS">B.Sc Physics</option>
+                      <option value="MSC-PHYSICS">M.Sc Physics</option>
+                      <option value="BSC-CHEMISTRY">B.Sc Chemistry</option>
+                      <option value="MSC-CHEMISTRY">M.Sc Chemistry</option>
+                      <!-- Arts & Humanities -->
+                      <option value="BA">BA (Bachelor of Arts)</option>
+                      <option value="MA">MA (Master of Arts)</option>
+                      <option value="BSC-PSYCHOLOGY">B.Sc Psychology</option>
+                      <option value="MSC-PSYCHOLOGY">M.Sc Psychology</option>
+                      <!-- Medical & Health -->
+                      <option value="BSC-NURSING">B.Sc Nursing</option>
+                      <option value="MSC-NURSING">M.Sc Nursing</option>
+                      <option value="BPHARMACY">B.Pharmacy</option>
+                      <option value="MPHARMACY">M.Pharmacy</option>
+                      <!-- Other -->
+                      <option value="DIPLOMA">Diploma</option>
+                      <option value="CERTIFICATE">Certificate Course</option>
+                      <option value="OTHER">Other</option>
+                    </select>
+                    <label for="department" class="text-dark">
+                      <i class="bi bi-building me-2"></i>Department
+                    </label>
+                    <div class="invalid-feedback">
+                      <i class="bi bi-exclamation-triangle me-1"></i>Please select a department
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="tel"
+                      formControlName="phone"
+                      class="form-control bg-white"
+                      id="phone"
+                      placeholder="Phone Number"
+                      [class.is-invalid]="form.controls['phone'].invalid && form.controls['phone'].touched"
+                    />
+                    <label for="phone" class="text-dark">
+                      <i class="bi bi-telephone me-2"></i>Phone Number
+                    </label>
+                    <div class="invalid-feedback">
+                      <i class="bi bi-exclamation-triangle me-1"></i>Phone number is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Section -->
+            <div class="mb-4">
+              <h5 class="text-white mb-3">
+                <i class="bi bi-shield-lock-fill me-2"></i>Security
+              </h5>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  formControlName="password"
+                  class="form-control bg-white"
+                  id="password"
+                  placeholder="Password"
+                  [class.is-invalid]="form.controls['password'].invalid && form.controls['password'].touched"
+                />
+                <label for="password" class="text-dark">
+                  <i class="bi bi-lock me-2"></i>Password
+                </label>
+                <div class="invalid-feedback">
+                  <i class="bi bi-exclamation-triangle me-1"></i>Password must be at least 6 characters long
+                </div>
+                <div class="form-text text-white-50">
+                  <i class="bi bi-info-circle me-1"></i>Use a strong password with at least 6 characters
+                </div>
+              </div>
+            </div>
+
+            <!-- Register Button -->
+            <div class="d-grid mb-3">
+              <button
+                class="btn btn-light btn-lg fw-bold shadow-sm"
+                type="submit"
+                [disabled]="form.invalid"
+                style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4); border: none; color: white;"
+              >
+                <i class="bi bi-person-plus me-2"></i>
+                <span *ngIf="!isLoading">Create Account</span>
+                <span *ngIf="isLoading">
+                  <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                  Creating Account...
+                </span>
+              </button>
+            </div>
+
+            <!-- Additional Links -->
+            <div class="text-center">
+              <p class="text-white-50 mb-2">Already have an account?</p>
+              <a routerLink="/login" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div class="alert alert-success alert-dismissible fade show mt-3" *ngIf="successMessage" role="alert">
+        <i class="bi bi-check-circle me-2"></i>{{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade show mt-3" *ngIf="errorMessage" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>{{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,183 @@
+<div class="container py-5">
+  <div class="row">
+    <!-- Submit Complaint Section -->
+    <div class="col-lg-8 mb-5">
+      <div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-5">
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <div class="mb-3">
+              <i class="bi bi-chat-dots-fill text-white" style="font-size: 4rem;"></i>
+            </div>
+            <h2 class="text-white fw-bold mb-2">Submit Your Complaint</h2>
+            <p class="text-white-50 mb-0">We value your feedback and are here to help resolve any issues</p>
+          </div>
+
+          <!-- Complaint Form -->
+          <form (ngSubmit)="submit()" [formGroup]="form" novalidate>
+            <!-- Title Field -->
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                formControlName="title"
+                class="form-control bg-white"
+                id="title"
+                placeholder="Complaint Title"
+                [class.is-invalid]="form.controls['title'].invalid && form.controls['title'].touched"
+              />
+              <label for="title" class="text-dark">
+                <i class="bi bi-tag me-2"></i>Complaint Title
+              </label>
+              <div class="invalid-feedback">
+                <i class="bi bi-exclamation-triangle me-1"></i>Please provide a clear title for your complaint
+              </div>
+            </div>
+
+            <!-- Category Field -->
+            <div class="form-floating mb-3">
+              <select
+                formControlName="category"
+                class="form-control bg-white"
+                id="category"
+                [class.is-invalid]="form.controls['category'].invalid && form.controls['category'].touched"
+              >
+                <option value="" disabled selected>Select Category</option>
+                <option value="Academics">📚 Academics</option>
+                <option value="Hostel">🏠 Hostel</option>
+                <option value="Admin">⚙️ Administration</option>
+                <option value="Other">❓ Other</option>
+              </select>
+              <label for="category" class="text-dark">
+                <i class="bi bi-list-check me-2"></i>Category
+              </label>
+              <div class="invalid-feedback">
+                <i class="bi bi-exclamation-triangle me-1"></i>Please select a category
+              </div>
+            </div>
+
+            <!-- Description Field -->
+            <div class="form-floating mb-4">
+              <textarea
+                formControlName="description"
+                class="form-control bg-white"
+                id="description"
+                placeholder="Describe your complaint in detail"
+                rows="5"
+                style="min-height: 120px;"
+                [class.is-invalid]="form.controls['description'].invalid && form.controls['description'].touched"
+              ></textarea>
+              <label for="description" class="text-dark">
+                <i class="bi bi-textarea-resize me-2"></i>Detailed Description
+              </label>
+              <div class="invalid-feedback">
+                <i class="bi bi-exclamation-triangle me-1"></i>Please provide a detailed description (minimum 10 characters)
+              </div>
+              <div class="form-text text-white-50">
+                <i class="bi bi-info-circle me-1"></i>Be specific about the issue, when it occurred, and what you'd like us to do
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <button
+                  class="btn btn-light btn-lg fw-bold shadow-sm w-100"
+                  type="submit"
+                  [disabled]="form.invalid"
+                  style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4); border: none; color: white;"
+                >
+                  <i class="bi bi-send me-2"></i>
+                  <span *ngIf="!isLoading">Submit Complaint</span>
+                  <span *ngIf="isLoading">
+                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                    Submitting...
+                  </span>
+                </button>
+              </div>
+              <div class="col-md-6 mb-3">
+                <button
+                  class="btn btn-outline-light btn-lg fw-bold shadow-sm w-100"
+                  type="button"
+                  (click)="resetForm()"
+                  style="border: 2px solid rgba(255, 255, 255, 0.8); color: white;"
+                >
+                  <i class="bi bi-arrow-counterclockwise me-2"></i>
+                  Reset Form
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div class="alert alert-success alert-dismissible fade show mt-3" *ngIf="successMessage" role="alert">
+        <i class="bi bi-check-circle me-2"></i>{{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade show mt-3" *ngIf="errorMessage" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>{{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+    </div>
+
+    <!-- My Complaints Section -->
+    <div class="col-lg-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <i class="bi bi-list-ul me-2"></i>My Complaints
+          </h5>
+        </div>
+        <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+          <div *ngIf="complaints?.length === 0" class="text-center text-muted py-4">
+            <i class="bi bi-inbox-fill" style="font-size: 3rem;"></i>
+            <p class="mt-2 mb-0">No complaints submitted yet</p>
+            <small>Submit your first complaint above</small>
+          </div>
+
+          <div *ngFor="let complaint of complaints" class="complaint-item mb-3 p-3 border rounded">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h6 class="mb-1 text-truncate">{{ complaint.title }}</h6>
+              <span class="badge"
+                    [class]="getStatusBadgeClass(complaint.status)">
+                {{ complaint.status }}
+              </span>
+            </div>
+
+            <p class="text-muted small mb-2">{{ complaint.description | slice:0:100 }}...</p>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">
+                <i class="bi bi-tag me-1"></i>{{ complaint.category }}
+              </small>
+              <small class="text-muted">
+                <i class="bi bi-calendar me-1"></i>{{ complaint.created_at | date:'short' }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="card shadow-lg border-0 mt-3">
+        <div class="card-body text-center">
+          <h6 class="text-muted mb-2">Complaint Statistics</h6>
+          <div class="row text-center">
+            <div class="col-6">
+              <div class="stat-number text-primary fw-bold" style="font-size: 2rem;">{{ complaints.length || 0 }}</div>
+              <small class="text-muted">Total</small>
+            </div>
+            <div class="col-6">
+              <div class="stat-number text-success fw-bold" style="font-size: 2rem;">
+                {{ resolvedComplaintsCount }}
+              </div>
+              <small class="text-muted">Resolved</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

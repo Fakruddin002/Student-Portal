@@ -1,0 +1,77 @@
+<div class="app-container">
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background: linear-gradient(90deg, #4e73df, #1cc88a);">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-white fs-2" routerLink="/" style="font-family: 'Lobster', cursive;">
+  🎓 <span style="font-family: 'Lobster', cursive;">Student</span> 
+  <span class="text-warning" style="font-family: 'Poppins', sans-serif;">Portal</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Always show Home button -->
+          <li class="nav-item">
+            <a class="nav-link btn btn-light btn-md shadow-lg me-3 fw-bold px-3 py-2"
+               routerLink="/"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{exact: true}"
+               style="background: rgba(255, 255, 255, 0.95); color: #4e73df; border: 2px solid rgba(255, 255, 255, 0.8);">🏠 Home</a>
+          </li>
+          
+          <!-- Show Register and Login only when NOT logged in -->
+          <ng-container *ngIf="!isLoggedIn">
+            <li class="nav-item">
+              <a class="nav-link btn btn-warning btn-md shadow-lg me-3 fw-bold px-3 py-2"
+                 routerLink="/register"
+                 routerLinkActive="active"
+                 style="background: rgba(255, 255, 255, 0.95); color: #4e73df; border: 2px solid rgba(255, 255, 255, 0.8);">📝 Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-success btn-md shadow-lg me-3 fw-bold px-3 py-2"
+                 routerLink="/login"
+                 routerLinkActive="active"
+                 style="background: rgba(255, 255, 255, 0.95); color: #4e73df; border: 2px solid rgba(255, 255, 255, 0.8);">🔐 Login</a>
+            </li>
+          </ng-container>
+          
+          <!-- Show Complaint only when logged in -->
+          <ng-container *ngIf="isLoggedIn">
+            <li class="nav-item">
+              <a class="nav-link btn btn-info btn-md shadow-lg me-3 fw-bold px-3 py-2"
+                 routerLink="/complaint"
+                 routerLinkActive="active"
+                 style="background: rgba(255, 255, 255, 0.95); color: #4e73df; border: 2px solid rgba(255, 255, 255, 0.8);">📋 Complaint</a>
+            </li>
+            <!-- Logout button -->
+            <li class="nav-item">
+              <button class="nav-link btn btn-danger btn-md shadow-lg fw-bold px-3 py-2"
+                 (click)="logout()"
+                 style="background: rgba(255, 255, 255, 0.95); color: #4e73df; border: 2px solid rgba(255, 255, 255, 0.8);">🚪 Logout</button>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <footer class="footer text-white text-center py-3" style="background: linear-gradient(90deg, #1cc88a, #4e73df);">
+    <p class="mb-1">&copy; 2025 Student Portal. All Rights Reserved.</p>
+    <div>
+      <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+    </div>
+  </footer>
+</div>
+
+

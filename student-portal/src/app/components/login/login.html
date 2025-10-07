@@ -1,0 +1,93 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-5">
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <div class="mb-3">
+              <i class="bi bi-person-circle text-white" style="font-size: 4rem;"></i>
+            </div>
+            <h2 class="text-white fw-bold mb-2">Welcome Back</h2>
+            <p class="text-white-50 mb-0">Sign in to your Student Portal account</p>
+          </div>
+
+          <!-- Login Form -->
+          <form (ngSubmit)="onLogin()" [formGroup]="form" novalidate>
+            <!-- Email Field -->
+            <div class="form-floating mb-3">
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control bg-white"
+                id="email"
+                placeholder="name@example.com"
+                [class.is-invalid]="form.controls['email'].invalid && form.controls['email'].touched"
+              />
+              <label for="email" class="text-dark">
+                <i class="bi bi-envelope me-2"></i>Email Address
+              </label>
+              <div class="invalid-feedback" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+                <i class="bi bi-exclamation-triangle me-1"></i>Please enter a valid email address
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-floating mb-4">
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control bg-white"
+                id="password"
+                placeholder="Password"
+                [class.is-invalid]="form.controls['password'].invalid && form.controls['password'].touched"
+              />
+              <label for="password" class="text-dark">
+                <i class="bi bi-lock me-2"></i>Password
+              </label>
+              <div class="invalid-feedback" *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+                <i class="bi bi-exclamation-triangle me-1"></i>Password is required
+              </div>
+            </div>
+
+            <!-- Login Button -->
+            <div class="d-grid mb-3">
+              <button
+                class="btn btn-light btn-lg fw-bold shadow-sm"
+                type="submit"
+                [disabled]="form.invalid"
+                style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4); border: none; color: white;"
+              >
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                <span *ngIf="!isLoading">Sign In</span>
+                <span *ngIf="isLoading">
+                  <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                  Signing In...
+                </span>
+              </button>
+            </div>
+
+            <!-- Additional Links -->
+            <div class="text-center">
+              <p class="text-white-50 mb-2">Don't have an account?</p>
+              <a routerLink="/register" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-person-plus me-1"></i>Create Account
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div class="alert alert-success alert-dismissible fade show mt-3" *ngIf="successMessage" role="alert">
+        <i class="bi bi-check-circle me-2"></i>{{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade show mt-3" *ngIf="errorMessage" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>{{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+    </div>
+  </div>
+</div>
